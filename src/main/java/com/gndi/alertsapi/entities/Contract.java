@@ -1,6 +1,9 @@
 package com.gndi.alertsapi.entities;
 
-public class Contract {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Contract implements Serializable {
     private Integer id;
     private String contractId;
     private Double totalCost;
@@ -19,13 +22,9 @@ public class Contract {
         this.totalRevenue = totalRevenue;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) { this.id = id; }
 
     public String getContractId() {
         return contractId;
@@ -57,5 +56,18 @@ public class Contract {
 
     public void setTotalRevenue(Double totalRevenue) {
         this.totalRevenue = totalRevenue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contract contract = (Contract) o;
+        return id.equals(contract.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

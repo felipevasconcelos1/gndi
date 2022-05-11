@@ -1,10 +1,13 @@
 package com.gndi.alertsapi.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Beneficiary {
+public class Beneficiary implements Serializable {
     private Integer id;
     private Integer beneficiaryId;
+    private String contractId;
     private Double totalCosts;
     private Date timeStamp;
     private Integer totalOpme;
@@ -18,12 +21,13 @@ public class Beneficiary {
     public Beneficiary() {
     }
 
-    public Beneficiary(Integer id, Integer beneficiaryId, Double totalCosts, Date timeStamp
+    public Beneficiary(Integer id, Integer beneficiaryId, String contractId ,Double totalCosts, Date timeStamp
             , Integer totalOpme, Integer nonPsychiatricHospitalizationDays
             , Integer psychiatricHospitalizationDays, Date lastDischargeDate, String program
             , Integer daysBetweenHospitalization) {
         this.id = id;
         this.beneficiaryId = beneficiaryId;
+        this.contractId = contractId;
         this.totalCosts = totalCosts;
         this.timeStamp = timeStamp;
         this.totalOpme = totalOpme;
@@ -49,6 +53,10 @@ public class Beneficiary {
     public void setBeneficiaryId(Integer beneficiaryId) {
         this.beneficiaryId = beneficiaryId;
     }
+
+    public String getContractId() { return contractId; }
+
+    public void setContractId(String contractId) { this.contractId = contractId; }
 
     public Double getTotalCosts() {
         return totalCosts;
@@ -112,5 +120,18 @@ public class Beneficiary {
 
     public void setDaysBetweenHospitalization(Integer daysBetweenHospitalization) {
         this.daysBetweenHospitalization = daysBetweenHospitalization;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Beneficiary that = (Beneficiary) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

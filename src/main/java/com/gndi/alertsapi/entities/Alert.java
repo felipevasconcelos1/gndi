@@ -1,9 +1,13 @@
 package com.gndi.alertsapi.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Alert {
+
+public class Alert implements Serializable {
     private Integer id;
+    private Integer hospitalizationId;
     private Integer beneficiaryId;
     private Date hospitalizationDate;
     private Integer cityId;
@@ -35,7 +39,7 @@ public class Alert {
     public Alert() {
     }
 
-    public Alert(Integer id, Integer beneficiaryId, Date hospitalizationDate, Integer cityId
+    public Alert(Integer id, Integer hospitalizationId , Integer beneficiaryId, Date hospitalizationDate, Integer cityId
             , Integer providerId, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Date lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
@@ -44,6 +48,7 @@ public class Alert {
             , Boolean gpSinistrality, Boolean gpAge, Date creationDate, Boolean gpProgram, String program
             , String networkType, String region) {
         this.id = id;
+        this.hospitalizationId = hospitalizationId;
         this.beneficiaryId = beneficiaryId;
         this.hospitalizationDate = hospitalizationDate;
         this.cityId = cityId;
@@ -79,6 +84,14 @@ public class Alert {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getHospitalizationId() {
+        return hospitalizationId;
+    }
+
+    public void setHospitalizationId(Integer hospitalizationId) {
+        this.hospitalizationId = hospitalizationId;
     }
 
     public Integer getBeneficiaryId() {
@@ -295,5 +308,18 @@ public class Alert {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Alert alert = (Alert) o;
+        return id.equals(alert.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -1,15 +1,17 @@
 package com.gndi.alertsapi.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Hospitalization {
+public class Hospitalization implements Serializable {
     private Integer id;
     private Integer beneficiaryId;
     private String contractId;
     private Date hospitalizationDate;
     private Date alertCreation;
-    private Integer cityId;
-    private Integer providerId;
+    private Long cityId;
+    private Long providerId;
     private String natureGuide;
     private String networkType;
     private String region;
@@ -18,7 +20,7 @@ public class Hospitalization {
     }
 
     public Hospitalization(Integer id, Integer beneficiaryId, String contractId
-            , Date hospitalizationDate, Date alertCreation, Integer cityId, Integer providerId
+            , Date hospitalizationDate, Date alertCreation, Long cityId, Long providerId
             , String natureGuide, String networkType, String region) {
         this.id = id;
         this.beneficiaryId = beneficiaryId;
@@ -32,13 +34,9 @@ public class Hospitalization {
         this.region = region;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) { this.id = id; }
 
     public Integer getBeneficiaryId() {
         return beneficiaryId;
@@ -72,19 +70,19 @@ public class Hospitalization {
         this.alertCreation = alertCreation;
     }
 
-    public Integer getCityId() {
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(Integer cityId) {
+    public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
 
-    public Integer getProviderId() {
+    public Long getProviderId() {
         return providerId;
     }
 
-    public void setProviderId(Integer providerId) {
+    public void setProviderId(Long providerId) {
         this.providerId = providerId;
     }
 
@@ -110,5 +108,18 @@ public class Hospitalization {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hospitalization that = (Hospitalization) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -1,6 +1,10 @@
 package com.gndi.alertsapi.entities;
 
-public class City {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class City implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
     private String federalUnity;
@@ -46,5 +50,18 @@ public class City {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return id.equals(city.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

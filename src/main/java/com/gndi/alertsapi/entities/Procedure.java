@@ -1,12 +1,14 @@
 package com.gndi.alertsapi.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Procedure {
+public class Procedure implements Serializable {
     private Integer id;
     private Integer beneficiaryId;
     private Integer requestingProviderId;
-    private String contractId;
+    private Integer contractId;
     private Date hospitalizationDate;
     private Date dischargeDate;
     private String nature;
@@ -29,7 +31,7 @@ public class Procedure {
     public Procedure() {
     }
 
-    public Procedure(Integer id, Integer beneficiaryId, Integer requestingProviderId, String contractId
+    public Procedure(Integer id, Integer beneficiaryId, Integer requestingProviderId, Integer contractId
             , Date hospitalizationDate, Date dischargeDate, String nature, String regime
             , Integer executorProviderId, Integer cityId, String code, String name, Double value
             , Integer quantity, String classification, Integer guideCode, Integer account, String cid
@@ -82,11 +84,11 @@ public class Procedure {
         this.requestingProviderId = requestingProviderId;
     }
 
-    public String getContractId() {
+    public Integer getContractId() {
         return contractId;
     }
 
-    public void setContractId(String contractId) {
+    public void setContractId(Integer contractId) {
         this.contractId = contractId;
     }
 
@@ -232,5 +234,18 @@ public class Procedure {
 
     public void setLiberationDate(Date liberationDate) {
         this.liberationDate = liberationDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Procedure procedure = (Procedure) o;
+        return id.equals(procedure.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
