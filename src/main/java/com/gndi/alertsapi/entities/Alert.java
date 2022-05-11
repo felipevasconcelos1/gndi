@@ -9,7 +9,7 @@ public class Alert {
     private Integer cityId;
     private Integer providerId;
     private Integer beneficiaryAge;
-    private Integer VidasContract;
+    private Integer vidasContract;
     private Double beneficiaryTotalCosts;
     private Integer totalOpme;
     private Integer psychiatricHospitalizationDays;
@@ -49,7 +49,7 @@ public class Alert {
         this.cityId = cityId;
         this.providerId = providerId;
         this.beneficiaryAge = beneficiaryAge;
-        VidasContract = vidasContract;
+        this.vidasContract = vidasContract;
         this.beneficiaryTotalCosts = beneficiaryTotalCosts;
         this.totalOpme = totalOpme;
         this.psychiatricHospitalizationDays = psychiatricHospitalizationDays;
@@ -122,11 +122,11 @@ public class Alert {
     }
 
     public Integer getVidasContract() {
-        return VidasContract;
+        return vidasContract;
     }
 
     public void setVidasContract(Integer vidasContract) {
-        VidasContract = vidasContract;
+        vidasContract = vidasContract;
     }
 
     public Double getBeneficiaryTotalCosts() {
