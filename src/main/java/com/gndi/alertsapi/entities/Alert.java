@@ -27,7 +27,6 @@ public class Alert implements Serializable {
     private Integer nonPsychiatricHospitalizationDays;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant lastDischargeDate;
-
     private Double totalContractCost;
     private Double totalCoparticipationCosts;
     private Double totalContractRevenue;
