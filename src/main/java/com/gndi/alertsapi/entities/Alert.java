@@ -1,18 +1,23 @@
 package com.gndi.alertsapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
 @Entity
+@Table(name="tb_alert")
 public class Alert implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer hospitalizationId;
-    private Integer beneficiaryId;
+    //private Integer beneficiaryId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant hospitalizationDate;
+
     private Integer cityId;
     private Integer providerId;
     private Integer beneficiaryAge;
@@ -21,7 +26,9 @@ public class Alert implements Serializable {
     private Integer totalOpme;
     private Integer psychiatricHospitalizationDays;
     private Integer nonPsychiatricHospitalizationDays;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant lastDischargeDate;
+
     private Double totalContractCost;
     private Double totalCoparticipationCosts;
     private Double totalContractRevenue;
@@ -33,7 +40,9 @@ public class Alert implements Serializable {
     private Boolean gpRecentHospitalization;
     private Boolean gpSinistrality;
     private Boolean gpAge;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant creationDate;
+
     private Boolean gpProgram;
     private String program;
     private String networkType;
@@ -46,7 +55,7 @@ public class Alert implements Serializable {
     public Alert() {
     }
 
-    public Alert(Integer id, Integer hospitalizationId , Integer beneficiaryId, Instant hospitalizationDate, Integer cityId
+    public Alert(Integer id, Integer hospitalizationId , Instant hospitalizationDate, Integer cityId
             , Integer providerId, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
@@ -56,7 +65,6 @@ public class Alert implements Serializable {
             , String networkType, String region) {
         this.id = id;
         this.hospitalizationId = hospitalizationId;
-        this.beneficiaryId = beneficiaryId;
         this.hospitalizationDate = hospitalizationDate;
         this.cityId = cityId;
         this.providerId = providerId;
@@ -100,7 +108,7 @@ public class Alert implements Serializable {
     public void setHospitalizationId(Integer hospitalizationId) {
         this.hospitalizationId = hospitalizationId;
     }
-
+    /*
     public Integer getBeneficiaryId() {
         return beneficiaryId;
     }
@@ -108,6 +116,8 @@ public class Alert implements Serializable {
     public void setBeneficiaryId(Integer beneficiaryId) {
         this.beneficiaryId = beneficiaryId;
     }
+
+     */
 
     public Instant getHospitalizationDate() {
         return hospitalizationDate;

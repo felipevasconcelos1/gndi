@@ -1,5 +1,7 @@
 package com.gndi.alertsapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="tb_beneficiary")
 public class Beneficiary implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +26,9 @@ public class Beneficiary implements Serializable {
     private String program;
     private Integer daysBetweenHospitalization;
 
-    @OneToMany(mappedBy = "beneficiary")
+    @JsonIgnore
+    @OneToMany(mappedBy="beneficiary")
     private List<Alert> alerts = new ArrayList<>();
-
-
 
     public Beneficiary() {
     }
