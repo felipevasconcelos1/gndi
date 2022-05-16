@@ -8,7 +8,6 @@ import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name="tb_alert")
 public class Alert implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -326,6 +325,14 @@ public class Alert implements Serializable {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public Beneficiary getBeneficiary() {
+        return beneficiary;
+    }
+
+    public void setBeneficiary(Beneficiary beneficiary) {
+        this.beneficiary = beneficiary;
     }
 
     @Override
