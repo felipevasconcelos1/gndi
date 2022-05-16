@@ -32,9 +32,9 @@ public class TestConfig implements CommandLineRunner {
         beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
 
 
-        Alert alert1 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), 1, 1, 34, 1, 2500.05, 0, null, null, Instant.parse("2020-12-20T19:53:06Z"), 500.02, 0.0, 9452.25, null, null, null, null, null, null, null, null, null, null, null, null, null);
-        Alert alert2 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), 1, 1, 34, 1, 2500.05, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-        Alert alert3 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), 1, 1, 34, 1, 2500.05, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        Alert alert1 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), 1, 1, 34, 1, 2500.05, 0, null, null, Instant.parse("2020-12-20T19:53:06Z"), 500.02, 0.0, 9452.25, null, null, null, null, null, null, null, null, null, null, null, null, null, beneficiary1);
+        Alert alert2 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), 1, 1, 34, 1, 2500.05, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, beneficiary2);
+        Alert alert3 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), 1, 1, 34, 1, 2500.05, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, beneficiary1);
 
         beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
         alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3));

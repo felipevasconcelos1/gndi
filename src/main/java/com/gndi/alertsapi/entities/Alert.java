@@ -62,7 +62,7 @@ public class Alert implements Serializable {
             , Double totalContractRevenue, String contractId, Boolean gpCost, Boolean gpOpme
             , Boolean gpHospitalization, Boolean gpPsychiatricHospitalizationDays, Boolean gpRecentHospitalization
             , Boolean gpSinistrality, Boolean gpAge, Instant creationDate, Boolean gpProgram, String program
-            , String networkType, String region) {
+            , String networkType, String region, Beneficiary beneficiary) {
         this.id = id;
         this.hospitalizationId = hospitalizationId;
         this.hospitalizationDate = hospitalizationDate;
@@ -91,6 +91,7 @@ public class Alert implements Serializable {
         this.program = program;
         this.networkType = networkType;
         this.region = region;
+        this.beneficiary = beneficiary;
     }
 
     public Integer getId() {
