@@ -1,11 +1,8 @@
 package com.gndi.alertsapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +12,7 @@ public class Alert implements Serializable {
     private Integer id;
     private Integer hospitalizationId;
     private Integer beneficiaryId;
-    private Date hospitalizationDate;
+    private Instant hospitalizationDate;
     private Integer cityId;
     private Integer providerId;
     private Integer beneficiaryAge;
@@ -24,7 +21,7 @@ public class Alert implements Serializable {
     private Integer totalOpme;
     private Integer psychiatricHospitalizationDays;
     private Integer nonPsychiatricHospitalizationDays;
-    private Date lastDischargeDate;
+    private Instant lastDischargeDate;
     private Double totalContractCost;
     private Double totalCoparticipationCosts;
     private Double totalContractRevenue;
@@ -36,22 +33,26 @@ public class Alert implements Serializable {
     private Boolean gpRecentHospitalization;
     private Boolean gpSinistrality;
     private Boolean gpAge;
-    private Date creationDate;
+    private Instant creationDate;
     private Boolean gpProgram;
     private String program;
     private String networkType;
     private String region;
 
+    @ManyToOne
+    @JoinColumn(name = "beneficiary_id")
+    private Beneficiary beneficiary;
+
     public Alert() {
     }
 
-    public Alert(Integer id, Integer hospitalizationId , Integer beneficiaryId, Date hospitalizationDate, Integer cityId
+    public Alert(Integer id, Integer hospitalizationId , Integer beneficiaryId, Instant hospitalizationDate, Integer cityId
             , Integer providerId, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
-            , Date lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
+            , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
             , Double totalContractRevenue, String contractId, Boolean gpCost, Boolean gpOpme
             , Boolean gpHospitalization, Boolean gpPsychiatricHospitalizationDays, Boolean gpRecentHospitalization
-            , Boolean gpSinistrality, Boolean gpAge, Date creationDate, Boolean gpProgram, String program
+            , Boolean gpSinistrality, Boolean gpAge, Instant creationDate, Boolean gpProgram, String program
             , String networkType, String region) {
         this.id = id;
         this.hospitalizationId = hospitalizationId;
@@ -108,11 +109,11 @@ public class Alert implements Serializable {
         this.beneficiaryId = beneficiaryId;
     }
 
-    public Date getHospitalizationDate() {
+    public Instant getHospitalizationDate() {
         return hospitalizationDate;
     }
 
-    public void setHospitalizationDate(Date hospitalizationDate) {
+    public void setHospitalizationDate(Instant hospitalizationDate) {
         this.hospitalizationDate = hospitalizationDate;
     }
 
@@ -180,11 +181,11 @@ public class Alert implements Serializable {
         this.nonPsychiatricHospitalizationDays = nonPsychiatricHospitalizationDays;
     }
 
-    public Date getLastDischargeDate() {
+    public Instant getLastDischargeDate() {
         return lastDischargeDate;
     }
 
-    public void setLastDischargeDate(Date lastDischargeDate) {
+    public void setLastDischargeDate(Instant lastDischargeDate) {
         this.lastDischargeDate = lastDischargeDate;
     }
 
@@ -276,11 +277,11 @@ public class Alert implements Serializable {
         this.gpAge = gpAge;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
     }
 

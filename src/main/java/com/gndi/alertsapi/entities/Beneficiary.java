@@ -1,11 +1,10 @@
 package com.gndi.alertsapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +22,10 @@ public class Beneficiary implements Serializable {
     private Date lastDischargeDate;
     private String program;
     private Integer daysBetweenHospitalization;
+
+    @OneToMany(mappedBy = "beneficiary")
+    private List<Alert> alerts = new ArrayList<>();
+
 
 
     public Beneficiary() {
@@ -127,6 +130,10 @@ public class Beneficiary implements Serializable {
 
     public void setDaysBetweenHospitalization(Integer daysBetweenHospitalization) {
         this.daysBetweenHospitalization = daysBetweenHospitalization;
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
     }
 
     @Override

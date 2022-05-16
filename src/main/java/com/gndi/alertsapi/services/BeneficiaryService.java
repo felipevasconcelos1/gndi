@@ -21,6 +21,6 @@ public class BeneficiaryService {
 
     public Beneficiary findbyId(Integer id) {
         Optional<Beneficiary> object = repository.findById(id);
-        return object.get();
+        return object.get(); 
     }
 }
