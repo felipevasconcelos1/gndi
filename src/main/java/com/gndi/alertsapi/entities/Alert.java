@@ -22,11 +22,16 @@ public class Alert implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant hospitalizationDate;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
-    private Integer providerId;
+
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    private Provider provider;
+
     private Integer beneficiaryAge;
     private Integer vidasContract;
     private Double beneficiaryTotalCosts;
@@ -60,7 +65,7 @@ public class Alert implements Serializable {
     }
 
     public Alert(Integer id, Integer hospitalizationId , Instant hospitalizationDate, City city
-            , Integer providerId, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
+            , Provider provider, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
             , Double totalContractRevenue, String contractId, Boolean gpCost, Boolean gpOpme
@@ -71,7 +76,7 @@ public class Alert implements Serializable {
         this.hospitalizationId = hospitalizationId;
         this.hospitalizationDate = hospitalizationDate;
         this.city = city;
-        this.providerId = providerId;
+        this.provider = provider;
         this.beneficiaryAge = beneficiaryAge;
         this.vidasContract = vidasContract;
         this.beneficiaryTotalCosts = beneficiaryTotalCosts;
@@ -123,25 +128,11 @@ public class Alert implements Serializable {
         this.hospitalizationDate = hospitalizationDate;
     }
 
-    public City getCityId() {
-        return city;
-    }
+    public Provider getProvider() { return provider; }
 
-    public void setCityId(City city) {
-        this.city = city;
-    }
+    public void setProvider(Provider provider) { this.provider = provider; }
 
-    public Integer getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(Integer providerId) {
-        this.providerId = providerId;
-    }
-
-    public Integer getBeneficiaryAge() {
-        return beneficiaryAge;
-    }
+    public Integer getBeneficiaryAge() { return beneficiaryAge; }
 
     public void setBeneficiaryAge(Integer beneficiaryAge) {
         this.beneficiaryAge = beneficiaryAge;
@@ -329,6 +320,14 @@ public class Alert implements Serializable {
 
     public void setBeneficiary(Beneficiary beneficiary) {
         this.beneficiary = beneficiary;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
