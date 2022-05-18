@@ -1,6 +1,7 @@
 package com.gndi.alertsapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,11 +14,18 @@ public class Alert implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer hospitalizationId;
-    //private Integer beneficiaryId;
+
+    @ManyToOne
+    @JoinColumn(name = "beneficiary_id")
+    private Beneficiary beneficiary;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant hospitalizationDate;
 
-    private Integer cityId;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
     private Integer providerId;
     private Integer beneficiaryAge;
     private Integer vidasContract;
@@ -46,14 +54,12 @@ public class Alert implements Serializable {
     private String networkType;
     private String region;
 
-    @ManyToOne
-    @JoinColumn(name = "beneficiary_id")
-    private Beneficiary beneficiary;
+
 
     public Alert() {
     }
 
-    public Alert(Integer id, Integer hospitalizationId , Instant hospitalizationDate, Integer cityId
+    public Alert(Integer id, Integer hospitalizationId , Instant hospitalizationDate, City city
             , Integer providerId, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
@@ -64,7 +70,7 @@ public class Alert implements Serializable {
         this.id = id;
         this.hospitalizationId = hospitalizationId;
         this.hospitalizationDate = hospitalizationDate;
-        this.cityId = cityId;
+        this.city = city;
         this.providerId = providerId;
         this.beneficiaryAge = beneficiaryAge;
         this.vidasContract = vidasContract;
@@ -107,16 +113,7 @@ public class Alert implements Serializable {
     public void setHospitalizationId(Integer hospitalizationId) {
         this.hospitalizationId = hospitalizationId;
     }
-    /*
-    public Integer getBeneficiaryId() {
-        return beneficiaryId;
-    }
 
-    public void setBeneficiaryId(Integer beneficiaryId) {
-        this.beneficiaryId = beneficiaryId;
-    }
-
-     */
 
     public Instant getHospitalizationDate() {
         return hospitalizationDate;
@@ -126,12 +123,12 @@ public class Alert implements Serializable {
         this.hospitalizationDate = hospitalizationDate;
     }
 
-    public Integer getCityId() {
-        return cityId;
+    public City getCityId() {
+        return city;
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setCityId(City city) {
+        this.city = city;
     }
 
     public Integer getProviderId() {

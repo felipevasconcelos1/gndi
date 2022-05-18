@@ -1,10 +1,11 @@
 package com.gndi.alertsapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,10 @@ public class City implements Serializable {
     private String name;
     private String federalUnity;
     private String region;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="city")
+    private List<Alert> alerts = new ArrayList<>();
 
     public City() {
     }
