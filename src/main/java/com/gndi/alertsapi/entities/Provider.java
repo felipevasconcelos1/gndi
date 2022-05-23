@@ -1,11 +1,13 @@
 package com.gndi.alertsapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +16,15 @@ import java.util.Objects;
 @Entity
 public class Provider implements Serializable {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer idProvider;
     private Integer hospitalizationTotal;
     private Integer outpatientTotal;
-    private Instant competence;
+
+    private LocalDate competence;
 
     @JsonIgnore
     @OneToMany(mappedBy = "provider")
@@ -31,7 +34,7 @@ public class Provider implements Serializable {
     }
 
     public Provider(Integer id, Integer idProvider, Integer hospitalizationTotal
-            , Integer outpatientTotal, Instant competence) {
+            , Integer outpatientTotal, LocalDate competence) {
         this.id = id;
         this.idProvider = idProvider;
         this.hospitalizationTotal = hospitalizationTotal;
@@ -71,12 +74,16 @@ public class Provider implements Serializable {
         this.outpatientTotal = outpatientTotal;
     }
 
-    public Instant getCompetence() {
+    public LocalDate getCompetence() {
         return competence;
     }
 
-    public void setCompetence(Instant competence) {
+    public void setCompetence(LocalDate competence) {
         this.competence = competence;
+    }
+    
+    public List<Alert> getAlerts() {
+        return alerts;
     }
 
     @Override

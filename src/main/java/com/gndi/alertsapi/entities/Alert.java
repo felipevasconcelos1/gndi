@@ -27,7 +27,6 @@ public class Alert implements Serializable {
     @JoinColumn(name = "city_id")
     private City city;
 
-
     @ManyToOne
     @JoinColumn(name = "provider_id")
     private Provider provider;
@@ -43,7 +42,11 @@ public class Alert implements Serializable {
     private Double totalContractCost;
     private Double totalCoparticipationCosts;
     private Double totalContractRevenue;
-    private String contractId;
+
+    @ManyToOne
+    @JoinColumn(name = "contract_id")
+    private Contract contract;
+
     private Boolean gpCost;
     private Boolean gpOpme;
     private Boolean gpHospitalization;
@@ -68,7 +71,7 @@ public class Alert implements Serializable {
             , Provider provider, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
-            , Double totalContractRevenue, String contractId, Boolean gpCost, Boolean gpOpme
+            , Double totalContractRevenue, Contract contract, Boolean gpCost, Boolean gpOpme
             , Boolean gpHospitalization, Boolean gpPsychiatricHospitalizationDays, Boolean gpRecentHospitalization
             , Boolean gpSinistrality, Boolean gpAge, Instant creationDate, Boolean gpProgram, String program
             , String networkType, String region, Beneficiary beneficiary) {
@@ -87,7 +90,7 @@ public class Alert implements Serializable {
         this.totalContractCost = totalContractCost;
         this.totalCoparticipationCosts = totalCoparticipationCosts;
         this.totalContractRevenue = totalContractRevenue;
-        this.contractId = contractId;
+        this.contract = contract;
         this.gpCost = gpCost;
         this.gpOpme = gpOpme;
         this.gpHospitalization = gpHospitalization;
@@ -210,12 +213,12 @@ public class Alert implements Serializable {
         this.totalContractRevenue = totalContractRevenue;
     }
 
-    public String getContractId() {
-        return contractId;
+    public Contract getContract() {
+        return contract;
     }
 
-    public void setContractId(String contractId) {
-        this.contractId = contractId;
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 
     public Boolean getGpCost() {

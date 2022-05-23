@@ -1,10 +1,11 @@
 package com.gndi.alertsapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,10 @@ public class Contract implements Serializable {
     private Double totalCost;
     private Double totalCoParticipation;
     private Double totalRevenue;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "contract")
+    private List<Alert> alerts = new ArrayList<>();
 
     public Contract() {
     }
@@ -63,6 +68,10 @@ public class Contract implements Serializable {
 
     public void setTotalRevenue(Double totalRevenue) {
         this.totalRevenue = totalRevenue;
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
     }
 
     @Override
