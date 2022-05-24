@@ -13,7 +13,6 @@ import java.util.Objects;
 public class Beneficiary implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private Integer beneficiaryId;
     private String contractId;
     private Double totalCosts;
@@ -32,11 +31,10 @@ public class Beneficiary implements Serializable {
     public Beneficiary() {
     }
 
-    public Beneficiary(Integer id, Integer beneficiaryId, String contractId ,Double totalCosts, Date timeStamp
+    public Beneficiary(Integer beneficiaryId, String contractId ,Double totalCosts, Date timeStamp
             , Integer totalOpme, Integer nonPsychiatricHospitalizationDays
             , Integer psychiatricHospitalizationDays, Date lastDischargeDate, String program
             , Integer daysBetweenHospitalization) {
-        this.id = id;
         this.beneficiaryId = beneficiaryId;
         this.contractId = contractId;
         this.totalCosts = totalCosts;
@@ -49,13 +47,6 @@ public class Beneficiary implements Serializable {
         this.daysBetweenHospitalization = daysBetweenHospitalization;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getBeneficiaryId() {
         return beneficiaryId;
@@ -142,11 +133,11 @@ public class Beneficiary implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Beneficiary that = (Beneficiary) o;
-        return id.equals(that.id);
+        return beneficiaryId.equals(that.beneficiaryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(beneficiaryId);
     }
 }

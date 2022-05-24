@@ -1,15 +1,12 @@
 package com.gndi.alertsapi.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,7 +78,7 @@ public class Provider implements Serializable {
     public void setCompetence(LocalDate competence) {
         this.competence = competence;
     }
-    
+
     public List<Alert> getAlerts() {
         return alerts;
     }
