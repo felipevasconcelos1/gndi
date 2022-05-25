@@ -21,6 +21,9 @@ public class TestConfig implements CommandLineRunner {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     @Autowired
+    private HospitalizationRepository hospitalizationRepository;
+
+    @Autowired
     private ProviderRepository providerRepository;
 
     @Autowired
@@ -41,6 +44,7 @@ public class TestConfig implements CommandLineRunner {
 
         // LocalDate date1 = LocalDate.of(2022, Month.DECEMBER, 27);
 
+
         Provider provider1 = new Provider(null, 1107, 0, 1, null);
         Provider provider2 = new Provider(null, 157, 0, 14, null);
         providerRepository.saveAll(Arrays.asList(provider1, provider2));
@@ -53,8 +57,8 @@ public class TestConfig implements CommandLineRunner {
         City city2 = new City(null, "UBERLANDIA", "MG", "TRIANGULO");
         cityRepository.saveAll(Arrays.asList(city1, city2));
 
-        Beneficiary beneficiary1 = new Beneficiary(null, 10500,"70022", 605.27, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
-        Beneficiary beneficiary2 = new Beneficiary(null, 10501,"70037", 1010.50, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
+        Beneficiary beneficiary1 = new Beneficiary(null, 10500,contract1, 605.27, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
+        Beneficiary beneficiary2 = new Beneficiary(null, 10501,contract1, 1010.50, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
         beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
 
 
@@ -64,5 +68,9 @@ public class TestConfig implements CommandLineRunner {
 
         beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
         alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3));
+
+        Hospitalization hospitalization1 = new Hospitalization(null, beneficiary1, "ContactID", null, null, null, null, null, null, null);
+        Hospitalization hospitalization2 = new Hospitalization(null, beneficiary2, "ContactID", null, null, null, null, null, null, null);
+        hospitalizationRepository.saveAll(Arrays.asList(hospitalization1, hospitalization2));
     }
 }

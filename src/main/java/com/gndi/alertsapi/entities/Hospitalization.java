@@ -1,9 +1,6 @@
 package com.gndi.alertsapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -13,7 +10,9 @@ public class Hospitalization implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer beneficiaryId;
+    @ManyToOne
+    @JoinColumn(name = "beneficiaryId")
+    private Beneficiary beneficiaryId;
     private String contractId;
     private Date hospitalizationDate;
     private Date alertCreation;
@@ -26,7 +25,7 @@ public class Hospitalization implements Serializable {
     public Hospitalization() {
     }
 
-    public Hospitalization(Integer id, Integer beneficiaryId, String contractId
+    public Hospitalization(Integer id, Beneficiary beneficiaryId, String contractId
             , Date hospitalizationDate, Date alertCreation, Long cityId, Long providerId
             , String natureGuide, String networkType, String region) {
         this.id = id;
@@ -45,11 +44,11 @@ public class Hospitalization implements Serializable {
 
     public void setId(Integer id) { this.id = id; }
 
-    public Integer getBeneficiaryId() {
+    public Beneficiary getBeneficiaryId() {
         return beneficiaryId;
     }
 
-    public void setBeneficiaryId(Integer beneficiaryId) {
+    public void setBeneficiaryId(Beneficiary beneficiaryId) {
         this.beneficiaryId = beneficiaryId;
     }
 

@@ -22,6 +22,10 @@ public class Contract implements Serializable {
     @OneToMany(mappedBy = "contract")
     private List<Alert> alerts = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "contractId")
+    private List<Beneficiary> beneficiaries = new ArrayList<>();
+
     public Contract() {
     }
 
