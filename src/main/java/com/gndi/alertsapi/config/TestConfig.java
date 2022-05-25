@@ -53,8 +53,8 @@ public class TestConfig implements CommandLineRunner {
         City city2 = new City(null, "UBERLANDIA", "MG", "TRIANGULO");
         cityRepository.saveAll(Arrays.asList(city1, city2));
 
-        Beneficiary beneficiary1 = new Beneficiary(null, "70022", 605.27, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
-        Beneficiary beneficiary2 = new Beneficiary(null, "70037", 1010.50, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
+        Beneficiary beneficiary1 = new Beneficiary(null, 10500,"70022", 605.27, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
+        Beneficiary beneficiary2 = new Beneficiary(null, 10501,"70037", 1010.50, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
         beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
 
 

@@ -11,8 +11,9 @@ import java.util.Objects;
 
 @Entity
 public class Beneficiary implements Serializable {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Id
     private Integer beneficiaryId;
     private String contractId;
     private Double totalCosts;
@@ -31,10 +32,11 @@ public class Beneficiary implements Serializable {
     public Beneficiary() {
     }
 
-    public Beneficiary(Integer beneficiaryId, String contractId ,Double totalCosts, Date timeStamp
+    public Beneficiary(Integer id, Integer beneficiaryId, String contractId ,Double totalCosts, Date timeStamp
             , Integer totalOpme, Integer nonPsychiatricHospitalizationDays
             , Integer psychiatricHospitalizationDays, Date lastDischargeDate, String program
             , Integer daysBetweenHospitalization) {
+        this.id = id;
         this.beneficiaryId = beneficiaryId;
         this.contractId = contractId;
         this.totalCosts = totalCosts;
@@ -47,6 +49,9 @@ public class Beneficiary implements Serializable {
         this.daysBetweenHospitalization = daysBetweenHospitalization;
     }
 
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) { this.id = id; }
 
     public Integer getBeneficiaryId() {
         return beneficiaryId;
