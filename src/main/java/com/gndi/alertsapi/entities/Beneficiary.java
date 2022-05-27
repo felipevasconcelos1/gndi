@@ -19,7 +19,7 @@ public class Beneficiary implements Serializable {
     private DmBeneficiary beneficiary;
     @ManyToOne
     @JoinColumn(name = "contract_id")
-    private Contract contractId;
+    private DmContract contractId;
     private Double totalCosts;
     private Date timeStamp;
     private Integer totalOpme;
@@ -32,7 +32,7 @@ public class Beneficiary implements Serializable {
     public Beneficiary() {
     }
 
-    public Beneficiary(Integer id, DmBeneficiary beneficiary, Contract contractId ,Double totalCosts, Date timeStamp
+    public Beneficiary(Integer id, DmBeneficiary beneficiary, DmContract contractId ,Double totalCosts, Date timeStamp
             , Integer totalOpme, Integer nonPsychiatricHospitalizationDays
             , Integer psychiatricHospitalizationDays, Date lastDischargeDate, String program
             , Integer daysBetweenHospitalization) {
@@ -61,9 +61,9 @@ public class Beneficiary implements Serializable {
         this.beneficiary = beneficiary;
     }
 
-    public Contract getContractId() { return contractId; }
+    public DmContract getContractId() { return contractId; }
 
-    public void setContractId(Contract contractId) { this.contractId = contractId; }
+    public void setContractId(DmContract contractId) { this.contractId = contractId; }
 
     public Double getTotalCosts() {
         return totalCosts;

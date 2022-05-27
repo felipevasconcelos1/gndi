@@ -1,9 +1,6 @@
 package com.gndi.alertsapi.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -15,7 +12,9 @@ public class Procedure implements Serializable {
     private Integer id;
     private Integer beneficiaryId;
     private Integer requestingProviderId;
-    private Integer contractId;
+    @ManyToOne
+    @JoinColumn(name = "contract_id")
+    private DmContract contractId;
     private Date hospitalizationDate;
     private Date dischargeDate;
     private String nature;
@@ -38,7 +37,7 @@ public class Procedure implements Serializable {
     public Procedure() {
     }
 
-    public Procedure(Integer id, Integer beneficiaryId, Integer requestingProviderId, Integer contractId
+    public Procedure(Integer id, Integer beneficiaryId, Integer requestingProviderId, DmContract contractId
             , Date hospitalizationDate, Date dischargeDate, String nature, String regime
             , Integer executorProviderId, Integer cityId, String code, String name, Double value
             , Integer quantity, String classification, Integer guideCode, Integer account, String cid
@@ -91,11 +90,11 @@ public class Procedure implements Serializable {
         this.requestingProviderId = requestingProviderId;
     }
 
-    public Integer getContractId() {
+    public DmContract getContractId() {
         return contractId;
     }
 
-    public void setContractId(Integer contractId) {
+    public void setContractId(DmContract contractId) {
         this.contractId = contractId;
     }
 

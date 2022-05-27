@@ -13,7 +13,9 @@ public class Hospitalization implements Serializable {
     @ManyToOne
     @JoinColumn(name = "beneficiaryId")
     private DmBeneficiary beneficiaryId;
-    private String contractId;
+    @ManyToOne
+    @JoinColumn(name = "contract_id")
+    private DmContract contractId;
     private Date hospitalizationDate;
     private Date alertCreation;
     private Long cityId;
@@ -22,10 +24,12 @@ public class Hospitalization implements Serializable {
     private String networkType;
     private String region;
 
+
+
     public Hospitalization() {
     }
 
-    public Hospitalization(Integer id, DmBeneficiary beneficiaryId, String contractId
+    public Hospitalization(Integer id, DmBeneficiary beneficiaryId, DmContract contractId
             , Date hospitalizationDate, Date alertCreation, Long cityId, Long providerId
             , String natureGuide, String networkType, String region) {
         this.id = id;
@@ -52,11 +56,11 @@ public class Hospitalization implements Serializable {
         this.beneficiaryId = beneficiaryId;
     }
 
-    public String getContractId() {
+    public DmContract getContractId() {
         return contractId;
     }
 
-    public void setContractId(String contractId) {
+    public void setContractId(DmContract contractId) {
         this.contractId = contractId;
     }
 

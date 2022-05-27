@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,23 +11,18 @@ public class Contract implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String contractId;
+    @ManyToOne
+    @JoinColumn(name = "contract_id")
+    private DmContract contractId;
     private Double totalCost;
     private Double totalCoParticipation;
     private Double totalRevenue;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "contract")
-    private List<Alert> alerts = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "contractId")
-    private List<Beneficiary> beneficiaries = new ArrayList<>();
 
     public Contract() {
     }
 
-    public Contract(Integer id, String contractId, Double totalCost
+    public Contract(Integer id, DmContract contractId, Double totalCost
             , Double totalCoParticipation, Double totalRevenue) {
         this.id = id;
         this.contractId = contractId;
@@ -42,11 +35,11 @@ public class Contract implements Serializable {
 
     public void setId(Integer id) { this.id = id; }
 
-    public String getContractId() {
+    public DmContract getContractId() {
         return contractId;
     }
 
-    public void setContractId(String contractId) {
+    public void setContractId(DmContract contractId) {
         this.contractId = contractId;
     }
 
@@ -72,10 +65,6 @@ public class Contract implements Serializable {
 
     public void setTotalRevenue(Double totalRevenue) {
         this.totalRevenue = totalRevenue;
-    }
-
-    public List<Alert> getAlerts() {
-        return alerts;
     }
 
     @Override

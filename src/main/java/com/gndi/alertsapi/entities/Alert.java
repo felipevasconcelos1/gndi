@@ -45,7 +45,7 @@ public class Alert implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "contract_id")
-    private Contract contract;
+    private DmContract contract;
 
     private Boolean gpCost;
     private Boolean gpOpme;
@@ -71,7 +71,7 @@ public class Alert implements Serializable {
             , Provider provider, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
-            , Double totalContractRevenue, Contract contract, Boolean gpCost, Boolean gpOpme
+            , Double totalContractRevenue, DmContract contract, Boolean gpCost, Boolean gpOpme
             , Boolean gpHospitalization, Boolean gpPsychiatricHospitalizationDays, Boolean gpRecentHospitalization
             , Boolean gpSinistrality, Boolean gpAge, LocalDate creationDate, Boolean gpProgram, String program
             , String networkType, String region, DmBeneficiary beneficiary) {
@@ -213,11 +213,11 @@ public class Alert implements Serializable {
         this.totalContractRevenue = totalContractRevenue;
     }
 
-    public Contract getContract() {
+    public DmContract getContract() {
         return contract;
     }
 
-    public void setContract(Contract contract) {
+    public void setContract(DmContract contract) {
         this.contract = contract;
     }
 
