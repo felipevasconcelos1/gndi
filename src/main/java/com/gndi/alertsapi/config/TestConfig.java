@@ -21,6 +21,9 @@ public class TestConfig implements CommandLineRunner {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     @Autowired
+    private DmBeneficiaryRepository dmBeneficiaryRepository;
+
+    @Autowired
     private HospitalizationRepository hospitalizationRepository;
 
     @Autowired
@@ -42,7 +45,7 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Locale.setDefault(Locale.US);
 
-        // LocalDate date1 = LocalDate.of(2022, Month.DECEMBER, 27);
+        //LocalDate date1 = LocalDate.of(2022, Month.DECEMBER, 27);
 
 
         Provider provider1 = new Provider(null, 1107, 0, 1, null);
@@ -57,20 +60,32 @@ public class TestConfig implements CommandLineRunner {
         City city2 = new City(null, "UBERLANDIA", "MG", "TRIANGULO");
         cityRepository.saveAll(Arrays.asList(city1, city2));
 
-        Beneficiary beneficiary1 = new Beneficiary(null, 10500,contract1, 605.27, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
-        Beneficiary beneficiary2 = new Beneficiary(null, 10501,contract1, 1010.50, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
-        beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
+        DmBeneficiary dm_beneficary1 = new DmBeneficiary(null, 32, "Someone who I gave name to");
+        DmBeneficiary dm_beneficary2 = new DmBeneficiary(null, 32, "Someone different who I gave name to");
+        dmBeneficiaryRepository.saveAll(Arrays.asList(dm_beneficary1, dm_beneficary2));
 
+        Beneficiary ft_beneficiary1 = new Beneficiary(null, dm_beneficary1,contract1, 605.27, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
+        Beneficiary ft_beneficiary2 = new Beneficiary(null, dm_beneficary2,contract1, 1010.50, sdf.parse("2022/05/11 07:18:28"), 0, 0, 0, null, null, null);
+        beneficiaryRepository.saveAll(Arrays.asList(ft_beneficiary1, ft_beneficiary2));
 
-        Alert alert1 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, provider1, 34, 1, 2500.05, 0, null, null, null, 500.02, 0.0, 9452.25, contract1, null, null, null, null, null, null, null, null, null, null, null, null, beneficiary1);
-        Alert alert2 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city2, provider1, 34, 1, 2500.05, 0, null, null, null, null, null, null, contract1, null, null, null, null, null, null, null, null, null, null, null, null, beneficiary2);
-        Alert alert3 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, provider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, contract1, null, null, null, null, null, null, null, null, null, null, null, null, beneficiary1);
+        LocalDate creationDate1 = LocalDate.of(2021, Month.NOVEMBER, 05);
+        LocalDate creationDate2 = LocalDate.of(2021, Month.NOVEMBER, 06);
+        LocalDate creationDate3 = LocalDate.of(2021, Month.NOVEMBER, 07);
+        LocalDate creationDate4 = LocalDate.of(2021, Month.NOVEMBER, 10);
+        LocalDate creationDate5 = LocalDate.of(2021, Month.NOVEMBER, 11);
 
-        beneficiaryRepository.saveAll(Arrays.asList(beneficiary1, beneficiary2));
-        alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3));
-
-        Hospitalization hospitalization1 = new Hospitalization(null, beneficiary1, "ContactID", null, null, null, null, null, null, null);
-        Hospitalization hospitalization2 = new Hospitalization(null, beneficiary2, "ContactID", null, null, null, null, null, null, null);
+        Hospitalization hospitalization1 = new Hospitalization(null, dm_beneficary1, "ContactID", null, null, null, null, null, null, null);
+        Hospitalization hospitalization2 = new Hospitalization(null, dm_beneficary2, "ContactID", null, null, null, null, null, null, null);
         hospitalizationRepository.saveAll(Arrays.asList(hospitalization1, hospitalization2));
+
+        Alert alert1 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, provider1, 34, 1, 2500.05, 0, null, null, null, 500.02, 0.0, 9452.25, contract1, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary1);
+        Alert alert2 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city2, provider1, 34, 1, 2500.05, 0, null, null, null, null, null, null, contract1, null, null, null, null, null, null, null, creationDate2, null, null, null, null, dm_beneficary1);
+        Alert alert3 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, provider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, contract1, null, null, null, null, null, null, null, creationDate3, null, null, null, null, dm_beneficary1);
+        Alert alert4 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, provider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, contract1, null, null, null, null, null, null, null, creationDate4, null, null, null, null, dm_beneficary1);
+        Alert alert5 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, provider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, contract1, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary2);
+
+        alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3, alert4, alert5));
+
+
     }
 }

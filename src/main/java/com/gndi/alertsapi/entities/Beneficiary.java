@@ -11,10 +11,12 @@ import java.util.Objects;
 
 @Entity
 public class Beneficiary implements Serializable {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Id
-    private Integer beneficiaryId;
+    @ManyToOne
+    @JoinColumn(name = "beneficiary_id")
+    private DmBeneficiary beneficiary;
     @ManyToOne
     @JoinColumn(name = "contract_id")
     private Contract contractId;
@@ -27,23 +29,15 @@ public class Beneficiary implements Serializable {
     private String program;
     private Integer daysBetweenHospitalization;
 
-    @JsonIgnore
-    @OneToMany(mappedBy="beneficiary")
-    private List<Alert> alerts = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "beneficiaryId")
-    private List<Hospitalization> hospitalizations = new ArrayList<>();
-
     public Beneficiary() {
     }
 
-    public Beneficiary(Integer id, Integer beneficiaryId, Contract contractId ,Double totalCosts, Date timeStamp
+    public Beneficiary(Integer id, DmBeneficiary beneficiary, Contract contractId ,Double totalCosts, Date timeStamp
             , Integer totalOpme, Integer nonPsychiatricHospitalizationDays
             , Integer psychiatricHospitalizationDays, Date lastDischargeDate, String program
             , Integer daysBetweenHospitalization) {
         this.id = id;
-        this.beneficiaryId = beneficiaryId;
+        this.beneficiary = beneficiary;
         this.contractId = contractId;
         this.totalCosts = totalCosts;
         this.timeStamp = timeStamp;
@@ -59,12 +53,12 @@ public class Beneficiary implements Serializable {
 
     public void setId(Integer id) { this.id = id; }
 
-    public Integer getBeneficiaryId() {
-        return beneficiaryId;
+    public DmBeneficiary getBeneficiary() {
+        return beneficiary;
     }
 
-    public void setBeneficiaryId(Integer beneficiaryId) {
-        this.beneficiaryId = beneficiaryId;
+    public void setBeneficiary(DmBeneficiary beneficiary) {
+        this.beneficiary = beneficiary;
     }
 
     public Contract getContractId() { return contractId; }
@@ -135,20 +129,18 @@ public class Beneficiary implements Serializable {
         this.daysBetweenHospitalization = daysBetweenHospitalization;
     }
 
-    public List<Alert> getAlerts() {
-        return alerts;
-    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Beneficiary that = (Beneficiary) o;
-        return beneficiaryId.equals(that.beneficiaryId);
+        return beneficiary.equals(that.beneficiary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(beneficiaryId);
+        return Objects.hash(beneficiary);
     }
 }

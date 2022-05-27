@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +17,7 @@ public class Alert implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "beneficiary_id")
-    private Beneficiary beneficiary;
+    private DmBeneficiary beneficiary;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant hospitalizationDate;
@@ -53,8 +54,8 @@ public class Alert implements Serializable {
     private Boolean gpRecentHospitalization;
     private Boolean gpSinistrality;
     private Boolean gpAge;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant creationDate;
+
+    private LocalDate creationDate;
 
     private Boolean gpProgram;
     private String program;
@@ -72,8 +73,8 @@ public class Alert implements Serializable {
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
             , Double totalContractRevenue, Contract contract, Boolean gpCost, Boolean gpOpme
             , Boolean gpHospitalization, Boolean gpPsychiatricHospitalizationDays, Boolean gpRecentHospitalization
-            , Boolean gpSinistrality, Boolean gpAge, Instant creationDate, Boolean gpProgram, String program
-            , String networkType, String region, Beneficiary beneficiary) {
+            , Boolean gpSinistrality, Boolean gpAge, LocalDate creationDate, Boolean gpProgram, String program
+            , String networkType, String region, DmBeneficiary beneficiary) {
         this.id = id;
         this.hospitalizationId = hospitalizationId;
         this.hospitalizationDate = hospitalizationDate;
@@ -276,11 +277,11 @@ public class Alert implements Serializable {
         this.gpAge = gpAge;
     }
 
-    public Instant getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Instant creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -316,11 +317,11 @@ public class Alert implements Serializable {
         this.region = region;
     }
 
-    public Beneficiary getBeneficiary() {
+    public DmBeneficiary getBeneficiary() {
         return beneficiary;
     }
 
-    public void setBeneficiary(Beneficiary beneficiary) {
+    public void setBeneficiary(DmBeneficiary beneficiary) {
         this.beneficiary = beneficiary;
     }
 
