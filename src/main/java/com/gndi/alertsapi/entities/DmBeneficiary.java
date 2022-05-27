@@ -27,6 +27,10 @@ public class DmBeneficiary {
     @OneToMany(mappedBy = "beneficiaryId")
     private List<Hospitalization> hospitalizations = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "beneficiaryId")
+    private List<Procedure> procedures = new ArrayList<>();
+
     public DmBeneficiary() {}
 
     public DmBeneficiary (Integer id, Integer age, String name) {
@@ -69,6 +73,10 @@ public class DmBeneficiary {
 
     public List<Hospitalization> getHospitalizations() {
         return hospitalizations;
+    }
+
+    public List<Procedure> getProcedures() {
+        return procedures;
     }
 
     @Override

@@ -21,6 +21,14 @@ public class City implements Serializable {
     @OneToMany(mappedBy="city")
     private List<Alert> alerts = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "cityId")
+    private List<Procedure> procedures = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cityId")
+    private List<Hospitalization> hospitalizations = new ArrayList<>();
+
     public City() {
     }
 

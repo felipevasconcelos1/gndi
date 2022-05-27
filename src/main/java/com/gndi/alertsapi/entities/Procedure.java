@@ -10,8 +10,10 @@ public class Procedure implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer beneficiaryId;
-    private Integer requestingProviderId;
+    @ManyToOne
+    @JoinColumn(name = "beneficiary_id")
+    private DmBeneficiary beneficiaryId; //dep
+    private Integer requestingProviderId; // dep
     @ManyToOne
     @JoinColumn(name = "contract_id")
     private DmContract contractId;
@@ -19,8 +21,10 @@ public class Procedure implements Serializable {
     private Date dischargeDate;
     private String nature;
     private String regime;
-    private Integer executorProviderId;
-    private Integer cityId;
+    private Integer executorProviderId; //dep
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City cityId; // dep
     private String code;
     private String name;
     private Double value;
@@ -37,9 +41,9 @@ public class Procedure implements Serializable {
     public Procedure() {
     }
 
-    public Procedure(Integer id, Integer beneficiaryId, Integer requestingProviderId, DmContract contractId
+    public Procedure(Integer id, DmBeneficiary beneficiaryId, Integer requestingProviderId, DmContract contractId
             , Date hospitalizationDate, Date dischargeDate, String nature, String regime
-            , Integer executorProviderId, Integer cityId, String code, String name, Double value
+            , Integer executorProviderId, City cityId, String code, String name, Double value
             , Integer quantity, String classification, Integer guideCode, Integer account, String cid
             , Date emissionDate, String guideStatus, String mainGuide, Date liberationDate) {
         this.id = id;
@@ -74,11 +78,11 @@ public class Procedure implements Serializable {
         this.id = id;
     }
 
-    public Integer getBeneficiaryId() {
+    public DmBeneficiary getBeneficiaryId() {
         return beneficiaryId;
     }
 
-    public void setBeneficiaryId(Integer beneficiaryId) {
+    public void setBeneficiaryId(DmBeneficiary beneficiaryId) {
         this.beneficiaryId = beneficiaryId;
     }
 
@@ -138,11 +142,11 @@ public class Procedure implements Serializable {
         this.executorProviderId = executorProviderId;
     }
 
-    public Integer getCityId() {
+    public City getCityId() {
         return cityId;
     }
 
-    public void setCityId(Integer cityId) {
+    public void setCityId(City cityId) {
         this.cityId = cityId;
     }
 
