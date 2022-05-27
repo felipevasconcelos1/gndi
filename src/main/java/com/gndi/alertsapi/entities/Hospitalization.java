@@ -18,8 +18,10 @@ public class Hospitalization implements Serializable {
     private DmContract contractId;
     private Date hospitalizationDate;
     private Date alertCreation;
-    private Long cityId;
-    private Long providerId;
+    private Integer cityId;
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    private DmProvider providerId;
     private String natureGuide;
     private String networkType;
     private String region;
@@ -30,7 +32,7 @@ public class Hospitalization implements Serializable {
     }
 
     public Hospitalization(Integer id, DmBeneficiary beneficiaryId, DmContract contractId
-            , Date hospitalizationDate, Date alertCreation, Long cityId, Long providerId
+            , Date hospitalizationDate, Date alertCreation, Integer cityId, DmProvider providerId
             , String natureGuide, String networkType, String region) {
         this.id = id;
         this.beneficiaryId = beneficiaryId;
@@ -80,19 +82,19 @@ public class Hospitalization implements Serializable {
         this.alertCreation = alertCreation;
     }
 
-    public Long getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(Long cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 
-    public Long getProviderId() {
+    public DmProvider getProviderId() {
         return providerId;
     }
 
-    public void setProviderId(Long providerId) {
+    public void setProviderId(DmProvider providerId) {
         this.providerId = providerId;
     }
 

@@ -14,23 +14,17 @@ public class Alert implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer hospitalizationId;
-
     @ManyToOne
     @JoinColumn(name = "beneficiary_id")
     private DmBeneficiary beneficiary;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant hospitalizationDate;
-
-
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
-
     @ManyToOne
     @JoinColumn(name = "provider_id")
-    private Provider provider;
-
+    private DmProvider provider;
     private Integer beneficiaryAge;
     private Integer vidasContract;
     private Double beneficiaryTotalCosts;
@@ -62,13 +56,10 @@ public class Alert implements Serializable {
     private String networkType;
     private String region;
 
-
-
-    public Alert() {
-    }
+    public Alert() {}
 
     public Alert(Integer id, Integer hospitalizationId , Instant hospitalizationDate, City city
-            , Provider provider, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
+            , DmProvider provider, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
             , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
             , Double totalContractRevenue, DmContract contract, Boolean gpCost, Boolean gpOpme
@@ -131,9 +122,9 @@ public class Alert implements Serializable {
         this.hospitalizationDate = hospitalizationDate;
     }
 
-    public Provider getProvider() { return provider; }
+    public DmProvider getProvider() { return provider; }
 
-    public void setProvider(Provider provider) { this.provider = provider; }
+    public void setProvider(DmProvider provider) { this.provider = provider; }
 
     public Integer getBeneficiaryAge() { return beneficiaryAge; }
 

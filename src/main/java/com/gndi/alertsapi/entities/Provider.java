@@ -12,24 +12,20 @@ import java.util.Objects;
 
 @Entity
 public class Provider implements Serializable {
-
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Id
-    private Integer idProvider;
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    private DmProvider idProvider;
     private Integer hospitalizationTotal;
     private Integer outpatientTotal;
-
     private LocalDate competence;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "provider")
-    private List<Alert> alerts = new ArrayList<>();
 
-    public Provider() {
-    }
+    public Provider() {}
 
-    public Provider(Integer id, Integer idProvider, Integer hospitalizationTotal
+    public Provider(Integer id, DmProvider idProvider, Integer hospitalizationTotal
             , Integer outpatientTotal, LocalDate competence) {
         this.id = id;
         this.idProvider = idProvider;
@@ -43,14 +39,14 @@ public class Provider implements Serializable {
     }
 
     public void setId(Integer id) {
-        this.idProvider = id;
+        this.id = id;
     }
 
-    public Integer getIdProvider() {
+    public DmProvider getIdProvider() {
         return idProvider;
     }
 
-    public void setIdProvider(Integer idProvider) {
+    public void setIdProvider(DmProvider idProvider) {
         this.idProvider = idProvider;
     }
 
@@ -76,10 +72,6 @@ public class Provider implements Serializable {
 
     public void setCompetence(LocalDate competence) {
         this.competence = competence;
-    }
-
-    public List<Alert> getAlerts() {
-        return alerts;
     }
 
     @Override
