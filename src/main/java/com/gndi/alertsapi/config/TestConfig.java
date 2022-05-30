@@ -60,15 +60,12 @@ public class TestConfig implements CommandLineRunner {
         DmProvider dmProvider2 = new DmProvider(null, "Ivo Fernandes Rocha", null);
         dmProviderRepository.saveAll(Arrays.asList(dmProvider1, dmProvider2));
 
-
-
         Provider provider1 = new Provider(null, dmProvider1, 0, 1, null);
         Provider provider2 = new Provider(null, dmProvider2, 0, 14, null);
         providerRepository.saveAll(Arrays.asList(provider1, provider2));
 
         Contract contract1 = new Contract(null, dmContract1, 805362.67, 6309.70, 617699.65);
         contractRepository.saveAll(Arrays.asList(contract1));
-
 
         City city1 = new City(null, "ARAGUARI", "MG", "TRIANGULO");
         City city2 = new City(null, "UBERLANDIA", "MG", "TRIANGULO");
@@ -88,8 +85,8 @@ public class TestConfig implements CommandLineRunner {
         LocalDate creationDate4 = LocalDate.of(2021, Month.NOVEMBER, 10);
         LocalDate creationDate5 = LocalDate.of(2021, Month.NOVEMBER, 11);
 
-        Hospitalization hospitalization1 = new Hospitalization(null, dm_beneficary1, dmContract1, null, null, null, dmProvider1, null, null, null);
-        Hospitalization hospitalization2 = new Hospitalization(null, dm_beneficary2, dmContract2, null, null, null, dmProvider2, null, null, null);
+        Hospitalization hospitalization1 = new Hospitalization(null, dm_beneficary1, dmContract1, null, null, city1, dmProvider1, null, null, null);
+        Hospitalization hospitalization2 = new Hospitalization(null, dm_beneficary2, dmContract2, null, null, city2, dmProvider2, null, null, null);
         hospitalizationRepository.saveAll(Arrays.asList(hospitalization1, hospitalization2));
 
         Alert alert1 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider1, 34, 1, 2500.05, 0, null, null, null, 500.02, 0.0, 9452.25, dmContract1, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary1);
@@ -97,7 +94,6 @@ public class TestConfig implements CommandLineRunner {
         Alert alert3 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate3, null, null, null, null, dm_beneficary1);
         Alert alert4 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate4, null, null, null, null, dm_beneficary1);
         Alert alert5 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract2, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary2);
-
         alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3, alert4, alert5));
 
 

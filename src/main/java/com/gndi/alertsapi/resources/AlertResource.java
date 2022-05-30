@@ -30,4 +30,6 @@ public class AlertResource {
         Alert object = service.findbyId(id);
         return ResponseEntity.ok().body(object);
     }
+
+
 }

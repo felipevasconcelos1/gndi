@@ -1,5 +1,6 @@
 package com.gndi.alertsapi.resources;
 
+import com.gndi.alertsapi.entities.Alert;
 import com.gndi.alertsapi.entities.Beneficiary;
 import com.gndi.alertsapi.entities.DmBeneficiary;
 import com.gndi.alertsapi.services.DmBeneficiaryService;
@@ -33,5 +34,10 @@ public class DmBeneficiaryResource {
     public ResponseEntity<DmBeneficiary> findById(@PathVariable Integer id) {
         DmBeneficiary object = service.findbyId(id);
         return ResponseEntity.ok().body(object);
+    }
+
+    @GetMapping(value = "/{id}/alerts")
+    public List<Alert> findAlertsByBeneficiaryId(@PathVariable Integer id) {
+        return service.findAlertsByBeneficiaryId(id);
     }
 }
