@@ -47,6 +47,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private AlertRepository alertRepository;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @Override
     public void run(String... args) throws Exception {
         Locale.setDefault(Locale.US);
@@ -95,6 +98,12 @@ public class TestConfig implements CommandLineRunner {
         Alert alert4 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate4, null, null, null, null, dm_beneficary1);
         Alert alert5 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract2, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary2);
         alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3, alert4, alert5));
+
+        Task task1 = new Task(null, dm_beneficary1, null, dmProvider1);
+        Task task2 = new Task(null, dm_beneficary1, null, dmProvider1);
+        Task task3 = new Task(null, dm_beneficary1, null, dmProvider1);
+        Task task4 = new Task(null, dm_beneficary1, null, dmProvider1);
+        taskRepository.saveAll(Arrays.asList(task1, task2, task3, task4));
 
 
     }

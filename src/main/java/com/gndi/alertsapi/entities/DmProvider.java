@@ -27,6 +27,10 @@ public class DmProvider {
     @OneToMany(mappedBy = "idProvider")
     private List<Provider> providers = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "provider")
+    private List<Task> tasks = new ArrayList<>();
+
     // Procedure (ManyToMany) ? - Dúvidas
 
     public DmProvider() {}

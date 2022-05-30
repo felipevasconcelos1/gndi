@@ -31,6 +31,10 @@ public class DmBeneficiary {
     @OneToMany(mappedBy = "beneficiaryId")
     private List<Procedure> procedures = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "beneficiary")
+    private List<Task> tasks = new ArrayList<>();
+
     public DmBeneficiary() {}
 
     public DmBeneficiary (Integer id, Integer age, String name) {
