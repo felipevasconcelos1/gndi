@@ -86,24 +86,35 @@ public class TestConfig implements CommandLineRunner {
         LocalDate creationDate2 = LocalDate.of(2021, Month.NOVEMBER, 06);
         LocalDate creationDate3 = LocalDate.of(2021, Month.NOVEMBER, 07);
         LocalDate creationDate4 = LocalDate.of(2021, Month.NOVEMBER, 10);
-        LocalDate creationDate5 = LocalDate.of(2021, Month.NOVEMBER, 11);
 
         Hospitalization hospitalization1 = new Hospitalization(null, dm_beneficary1, dmContract1, null, null, city1, dmProvider1, null, null, null);
         Hospitalization hospitalization2 = new Hospitalization(null, dm_beneficary2, dmContract2, null, null, city2, dmProvider2, null, null, null);
         hospitalizationRepository.saveAll(Arrays.asList(hospitalization1, hospitalization2));
 
-        Alert alert1 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider1, 34, 1, 2500.05, 0, null, null, null, 500.02, 0.0, 9452.25, dmContract1, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary1);
-        Alert alert2 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city2, dmProvider1, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate2, null, null, null, null, dm_beneficary1);
-        Alert alert3 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate3, null, null, null, null, dm_beneficary1);
-        Alert alert4 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate4, null, null, null, null, dm_beneficary1);
-        Alert alert5 = new Alert(null, 1, Instant.parse("2021-02-20T19:53:06Z"), city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract2, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary2);
+        LocalDate hospitalizationDate1 = LocalDate.of(2021, Month.NOVEMBER, 11);
+
+
+        Alert alert1 = new Alert(null, 1, hospitalizationDate1, city1, dmProvider1, 34, 1, 2500.05, 0, null, null, null, 500.02, 0.0, 9452.25, dmContract1, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary1);
+        Alert alert2 = new Alert(null, 1, hospitalizationDate1, city2, dmProvider1, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate2, null, null, null, null, dm_beneficary1);
+        Alert alert3 = new Alert(null, 1, hospitalizationDate1, city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate3, null, null, null, null, dm_beneficary1);
+        Alert alert4 = new Alert(null, 1, hospitalizationDate1, city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract1, null, null, null, null, null, null, null, creationDate4, null, null, null, null, dm_beneficary1);
+        Alert alert5 = new Alert(null, 1, hospitalizationDate1, city1, dmProvider2, 34, 1, 2500.05, 0, null, null, null, null, null, null, dmContract2, null, null, null, null, null, null, null, creationDate1, null, null, null, null, dm_beneficary2);
         alertRepository.saveAll(Arrays.asList(alert1, alert2, alert3, alert4, alert5));
 
-        Task task1 = new Task(null, dm_beneficary1, null, dmProvider1);
-        Task task2 = new Task(null, dm_beneficary1, null, dmProvider1);
-        Task task3 = new Task(null, dm_beneficary1, null, dmProvider1);
-        Task task4 = new Task(null, dm_beneficary1, null, dmProvider1);
-        taskRepository.saveAll(Arrays.asList(task1, task2, task3, task4));
+        Task task1 = new Task(null, alert1, alert1.getBeneficiary(), alert1.getHospitalizationDate(), alert1.getProvider());
+        Task task2 = new Task(null, alert1, alert1.getBeneficiary(), alert1.getHospitalizationDate(), alert1.getProvider());
+        Task task3 = new Task(null, alert1, alert1.getBeneficiary(), alert1.getHospitalizationDate(), alert1.getProvider());
+        Task task4 = new Task(null, alert1, alert1.getBeneficiary(), alert1.getHospitalizationDate(), alert1.getProvider());
+        Task task5 = new Task();
+        task5.setAlert(alert2);
+        task5.setBeneficiary(task5.getAlert().getBeneficiary());
+        task5.setHospitalizationDate(task5.getAlert().getHospitalizationDate());
+        task5.setProvider(task5.getAlert().getProvider());
+
+
+
+
+        taskRepository.saveAll(Arrays.asList(task1, task2, task3, task4, task5));
 
 
     }

@@ -16,11 +16,15 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "provider_id")
     private DmProvider provider;
+    @OneToOne
+    @JoinColumn(name = "alert_id", referencedColumnName = "id")
+    private Alert alert;
 
     public Task() {}
 
-    public Task(Integer id, DmBeneficiary beneficiary, LocalDate hospitalizationDate, DmProvider provider) {
+    public Task(Integer id, Alert alert,DmBeneficiary beneficiary, LocalDate hospitalizationDate, DmProvider provider) {
         this.id = id;
+        this.alert = alert;
         this.beneficiary = beneficiary;
         this.hospitalizationDate = hospitalizationDate;
         this.provider = provider;
@@ -29,6 +33,11 @@ public class Task {
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id; }
+
+
+    public Alert getAlert() { return alert; }
+
+    public void setAlert(Alert alert) { this.alert = alert; }
 
     public DmBeneficiary getBeneficiary() { return beneficiary; }
 

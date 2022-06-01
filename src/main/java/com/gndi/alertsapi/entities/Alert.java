@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,8 +17,7 @@ public class Alert implements Serializable {
     @ManyToOne
     @JoinColumn(name = "beneficiary_id")
     private DmBeneficiary beneficiary;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant hospitalizationDate;
+    private LocalDate hospitalizationDate;
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
@@ -31,8 +30,7 @@ public class Alert implements Serializable {
     private Integer totalOpme;
     private Integer psychiatricHospitalizationDays;
     private Integer nonPsychiatricHospitalizationDays;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant lastDischargeDate;
+    private LocalDate lastDischargeDate;
     private Double totalContractCost;
     private Double totalCoparticipationCosts;
     private Double totalContractRevenue;
@@ -58,10 +56,10 @@ public class Alert implements Serializable {
 
     public Alert() {}
 
-    public Alert(Integer id, Integer hospitalizationId , Instant hospitalizationDate, City city
+    public Alert(Integer id, Integer hospitalizationId , LocalDate hospitalizationDate, City city
             , DmProvider provider, Integer beneficiaryAge, Integer vidasContract, Double beneficiaryTotalCosts
             , Integer totalOpme, Integer psychiatricHospitalizationDays, Integer nonPsychiatricHospitalizationDays
-            , Instant lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
+            , LocalDate lastDischargeDate, Double totalContractCost, Double totalCoparticipationCosts
             , Double totalContractRevenue, DmContract contract, Boolean gpCost, Boolean gpOpme
             , Boolean gpHospitalization, Boolean gpPsychiatricHospitalizationDays, Boolean gpRecentHospitalization
             , Boolean gpSinistrality, Boolean gpAge, LocalDate creationDate, Boolean gpProgram, String program
@@ -114,11 +112,11 @@ public class Alert implements Serializable {
     }
 
 
-    public Instant getHospitalizationDate() {
+    public LocalDate getHospitalizationDate() {
         return hospitalizationDate;
     }
 
-    public void setHospitalizationDate(Instant hospitalizationDate) {
+    public void setHospitalizationDate(LocalDate hospitalizationDate) {
         this.hospitalizationDate = hospitalizationDate;
     }
 
@@ -172,11 +170,11 @@ public class Alert implements Serializable {
         this.nonPsychiatricHospitalizationDays = nonPsychiatricHospitalizationDays;
     }
 
-    public Instant getLastDischargeDate() {
+    public LocalDate getLastDischargeDate() {
         return lastDischargeDate;
     }
 
-    public void setLastDischargeDate(Instant lastDischargeDate) {
+    public void setLastDischargeDate(LocalDate lastDischargeDate) {
         this.lastDischargeDate = lastDischargeDate;
     }
 
